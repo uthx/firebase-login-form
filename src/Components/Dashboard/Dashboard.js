@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/authActionCreators";
@@ -21,11 +20,9 @@ const Dashboard = () => {
   const [uid, setUid] = useState();
   const [isUpdated, setIsUpdated] = useState(false);
   const [userData, setUserData] = useState();
-  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.authReducer);
-  console.log("->", isAuthenticated);
   const logoutHandler = () => {
     dispatch(logout());
     // history.push("/");
@@ -34,7 +31,6 @@ const Dashboard = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("hello");
         setUid(user.uid);
         getUserData(user.uid).then((docData) => setUserData(docData));
       }
@@ -45,7 +41,6 @@ const Dashboard = () => {
     };
   }, []);
 
-  console.log(userData);
 
   const updateHandler = (e) => {
     setIsUpdated(true);

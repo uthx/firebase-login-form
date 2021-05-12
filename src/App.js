@@ -4,10 +4,7 @@ import Signup from "./Components/Signup/Signup";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import ProfileNotFound from "./Components/ProfileNotFound";
-import { useSelector } from "react-redux";
 function App() {
-  const { isAuthenticated } = useSelector((state) => state.authReducer);
-  console.log("r u authen", isAuthenticated);
   return (
     <Container>
       <Router>

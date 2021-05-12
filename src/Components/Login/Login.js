@@ -10,7 +10,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { isAuthenticated } = useSelector((state) => state.authReducer);
-  console.log(isAuthenticated);
   const loginHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, loginPassword));
@@ -25,13 +24,10 @@ const Login = () => {
   useEffect(() => {
     if (isAuthenticated) {
       history.push("/dashboard");
-    } else {
-      console.log("nana check password first");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
   const signupHandler = (path) => {
-    console.log("called ");
     history.push(path);
   };
 

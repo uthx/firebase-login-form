@@ -51,12 +51,9 @@ export const login = (email, password) => (dispatch) => {
 };
 
 export const signup = (userData) => {
-  console.log("called");
-
   return function (dispatch) {
     const { email, password } = userData;
     dispatch(signupRequest());
-    console.log("object");
     (async () => {
       try {
         const userObject = await signupUser(email, password);
@@ -65,7 +62,6 @@ export const signup = (userData) => {
         delete userData.email;
         // userData.profileImage = base64String;
         await saveUser(userObject.user.uid, userData);
-        console.log(userObject.user.uid);
         dispatch(signupSuccess());
         dispatch(authInfoSuccess(true));
       } catch (e) {

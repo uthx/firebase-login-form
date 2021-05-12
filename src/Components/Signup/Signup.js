@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useInput } from "../../CustomHooks";
 import { signup } from "../../redux/auth/authActionCreators";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 const Signup = () => {
@@ -18,16 +18,13 @@ const Signup = () => {
   const [phNumber, , phNumberBinder] = useInput("");
   const [address, , addressBinder] = useInput("");
   const [landmark, , landmarkBinder] = useInput("");
-  const [, setProfileImage] = React.useState();
 
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.authReducer);
-  console.log(isAuthenticated);
+  // const { isAuthenticated } = useSelector((state) => state.authReducer);
   const history = useHistory();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log("called in singup");
     const userData = {
       email,
       age,
