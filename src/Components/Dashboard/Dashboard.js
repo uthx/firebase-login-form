@@ -4,10 +4,10 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/auth/authActionCreators";
 import { getUserData, updateUserData } from "../../helper/firebaseHelpers";
-
+import { Redirect } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -24,9 +24,11 @@ const Dashboard = () => {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.authReducer);
+  console.log("->", isAuthenticated);
   const logoutHandler = () => {
     dispatch(logout());
-    history.push("/");
+    // history.push("/");
   };
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const Dashboard = () => {
   };
   const handleSubmit = async (e) => {
     await updateUserData(uid, userData);
-    window.location.reload();
+    alert("Your details have been updated");
   };
   return (
     <div>
@@ -212,15 +214,17 @@ const Dashboard = () => {
               />
             </div>
           </FormDiv>
-          <FormDiv>
+          {/* <FormDiv>
             <p>Profile Picture</p>
             <p></p>
-          </FormDiv>
+          </FormDiv> */}
         </FormContainer>
         {isUpdated && (
           <>
             <SignupContainer>
-              <p className="description">Submit Changes to save Update</p>
+              <p className="description">
+                Your details have been updated and save
+              </p>
               <FormDiv className="form-div">
                 <button className="update-button" onClick={handleSubmit}>
                   Submit{" "}
@@ -238,6 +242,7 @@ const Dashboard = () => {
           </FormDiv>
         </SignupContainer>
       </Container>
+      {!isAuthenticated && <Redirect to="/" />}
     </div>
   );
 };

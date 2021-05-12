@@ -186,7 +186,7 @@ const Signup = () => {
             {...landmarkBinder}
           />
         </FormDiv>
-        <FormDiv>
+        {/* <FormDiv>
           <label htmlFor="profile-picture" id="profil-picture-label">
             Profile Picture{" "}
           </label>
@@ -197,7 +197,7 @@ const Signup = () => {
             accept="image/*"
             onChange={(e) => setProfileImage(e.target.files[0])}
           />
-        </FormDiv>
+        </FormDiv> */}
         <FormDiv>
           <button id="submit" className="submit-button" type="submit">
             Submit
