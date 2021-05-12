@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import styled from "styled-components";
+import Login from "./Components/Login/Login";
+import Signup from "./Components/Signup/Signup";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import ProfileNotFound from "./Components/ProfileNotFound";
+import { useSelector } from "react-redux";
 function App() {
+  const { isAuthenticated } = useSelector((state) => state.authReducer);
+  console.log("r u authen", isAuthenticated);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login}></Route>
+          <Route path="/signup" component={Signup}></Route>
+          <Route path="/dashboard" component={Dashboard}></Route>
+          <Route path="/profile-not-found" component={ProfileNotFound}></Route>
+        </Switch>
+      </Router>
+    </Container>
   );
 }
 
 export default App;
+const Container = styled.div``;
